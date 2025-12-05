@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Hall de guilde</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="background-overlay"></div>
+
+  <header class="top-bar">
+    <div class="logo">
+      <span class="logo-emblem">⚔️</span>
+      <div class="logo-text">
+        <div class="logo-title">Hall de guilde</div>
+        <div class="logo-subtitle">Chroniques d’un même univers partagé</div>
+      </div>
+    </div>
+
+    <nav class="main-nav">
+      <button class="nav-btn nav-btn-active" data-section="section-personnages">Personnages</button>
+      <button class="nav-btn" data-section="section-campagnes">Campagnes</button>
+      <button class="nav-btn" data-section="section-ressources">Ressources</button>
+    </nav>
+    <button id="export-data-btn" class="small-btn export-btn">Exporter l’univers</button>
+  </header>
+
+  <main class="main-content">
+    <!-- Bandeau style MMO -->
+    <section class="hero-banner">
+      <div class="hero-text">
+        <h1>La guilde</h1>
+        <p>
+          Plonge dans un univers partagé où chaque campagne laisse une trace.
+          Sélectionne un héros, consulte ses exploits, et découvre où le destin l’appellera ensuite.
+        </p>
+        <div class="hero-actions">
+          <button class="cta-btn cta-primary" data-section-jump="section-personnages">Personnage</button>
+          <button class="cta-btn cta-secondary" data-section-jump="section-campagnes">Voir les campagnes à venir</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION PERSONNAGES -->
+    <section id="section-personnages" class="section section-active">
+      <header class="section-header">
+        <h2>Personnages disponibles</h2>
+        <div class="section-controls">
+          <div class="filter-group">
+            <button class="chip chip-active" data-filter="all">Tous</button>
+            <button class="chip" data-filter="actif">Actifs</button>
+            <button class="chip" data-filter="legende">Légendes</button>
+            <button class="chip" data-filter="retraite">Retraités</button>
+          </div>
+          <button id="open-create-panel" class="small-btn">Créer un personnage</button>
+        </div>
+      </header>
+
+      <div class="character-grid" id="character-grid">
+        <!-- Cartes de personnages générées par script.js -->
+      </div>
+    </section>
+
+    <!-- SECTION CAMPAGNES -->
+    <section id="section-campagnes" class="section">
+      <header class="section-header">
+        <h2>Campagnes</h2>
+        <button id="open-campaign-panel" class="small-btn campaign-add-btn">Créer une campagne</button>
+      </header>
+
+      <div class="tabs">
+        <button class="tab tab-active" data-campaign-tab="en-cours">En cours</button>
+        <button class="tab" data-campaign-tab="en-attente">En attente</button>
+        
+        <button class="tab" data-campaign-tab="passees">Finies</button>
+      </div>
+
+      <div class="campaign-grid" id="campaign-grid">
+        <!-- Campagnes générées par script.js -->
+      </div>
+    </section>
+
+    <!-- SECTION RESSOURCES -->
+    <section id="section-ressources" class="section">
+      <header class="section-header">
+        <h2>Ressources de l’univers</h2>
+        <p class="section-subtitle">
+          Carte du monde et grands repères d’histoire pour garder ton univers cohérent entre toutes les campagnes.
+        </p>
+      </header>
+
+      <!-- Carte du monde -->
+      <article class="resource-card map-card">
+        <header class="resource-card-header">
+          <h3>Carte du monde</h3>
+        </header>
+        <p class="resource-intro">
+          Utilise cette carte comme support pendant les parties. Tu peux remplacer l’image
+          <code>world-map-placeholder.jpg</code> par ta propre carte, en gardant le même nom de fichier.
+        </p>
+        <div class="map-wrapper" id="map-wrapper">
+          <img id="world-map-image" src="world-map-placeholder.jpg" alt="Carte du monde" />
+          <input type="file" id="world-map-file" accept="image/*" style="display:none;" />
+        </div>
+        <p class="map-hint">
+          Pour changer la carte : crée ton image (par exemple <code>world-map-placeholder.jpg</code>) et remplace
+          le fichier dans le même dossier que <code>index.html</code>.
+        </p>
+      </article>
+
+      <!-- Onglets d’histoire / lore -->
+      <section class="lore-section">
+        <header class="lore-header">
+          <h3>Histoire & lore</h3>
+          <p class="section-subtitle">
+            Organise les grandes lignes de ton univers : création du monde, factions majeures, régions, chronologie globale…
+          </p>
+        </header>
+
+        <div class="lore-tabs-header">
+          <div class="lore-tabs" id="lore-tabs">
+            <!-- Onglets de lore générés en JS -->
+          </div>
+          <button id="open-lore-panel" class="small-btn lore-add-btn">Créer une section de lore</button>
+        </div>
+
+        <div class="lore-panels" id="lore-panels">
+          <!-- Panneaux de lore générés en JS -->
+        </div>
+      </section>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <span>© Ceria univers JdR partagé – Hall de guilde</span>
+  </footer>
+
+  
+
+  <!-- PANNEAU DE CRÉATION / ÉDITION DE LORE -->
+  <div id="lore-panel-backdrop" class="create-backdrop hidden">
+    <section class="create-panel">
+      <header class="create-header">
+        <h2>Section de lore</h2>
+        <button id="close-lore-panel" class="close-btn" aria-label="Fermer">✕</button>
+      </header>
+      <p class="create-subtitle">
+        Crée ou modifie une section de lore (histoire du monde, région, faction, etc.).
+      </p>
+
+      <form id="lore-form" class="create-form">
+        <div class="form-row">
+          <div class="form-field">
+            <label for="lore-title">Titre de la section</label>
+            <input type="text" id="lore-title" required placeholder="Ex : Histoire du monde, Royaumes du Nord, Ordre des Veilleurs..." />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-field">
+            <label for="lore-content">Contenu</label>
+            <textarea id="lore-content" rows="5" placeholder="Développe ici le lore de cette section."></textarea>
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <button type="button" id="cancel-lore" class="btn-ghost">Annuler</button>
+          <button type="submit" class="btn-primary">Enregistrer la section</button>
+        </div>
+
+        <p id="lore-message" class="create-message" aria-live="polite"></p>
+      </form>
+    </section>
+  </div>
+
+  <!-- PANNEAU DE CRÉATION / ÉDITION DE CAMPAGNE -->
+  <div id="campaign-panel-backdrop" class="create-backdrop hidden">
+    <section class="create-panel">
+      <header class="create-header">
+        <h2>Campagne</h2>
+        <button id="close-campaign-panel" class="close-btn" aria-label="Fermer">✕</button>
+      </header>
+      <p class="create-subtitle">
+        Crée ou modifie une campagne, son niveau et sa progression.
+      </p>
+
+      <form id="campaign-form" class="create-form">
+        <div class="form-row">
+          <div class="form-field">
+            <label for="camp-title">Titre de la campagne</label>
+            <input type="text" id="camp-title" required placeholder="Ex : Les Cendres de l’Empire de Verre" />
+          </div>
+          <div class="form-field">
+            <label for="camp-type">Type</label>
+            <select id="camp-type">
+              <option value="Longue">Longue</option>
+              <option value="Courte">Courte</option>
+              <option value="One-shot">One-shot</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-field">
+            <label for="camp-status">Statut</label>
+            <select id="camp-status">
+              <option value="en-cours">En cours</option>
+              <option value="en-attente">En attente</option>
+              <option value="passees">Terminée</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label for="camp-level">Niveau recommandé</label>
+            <input type="number" id="camp-level" min="1" max="30" value="1" />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-field">
+            <label for="camp-progress">Progression de la campagne (%)</label>
+            <input type="number" id="camp-progress" min="0" max="100" value="0" />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-field">
+            <label for="camp-summary">Résumé / où on en est</label>
+            <textarea id="camp-summary" rows="3" placeholder="Ex : Les héros viennent de découvrir la cité de verre..."></textarea>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-field">
+            <label for="camp-players">Personnages / groupe (optionnel)</label>
+            <input type="text" id="camp-players" placeholder="Ex : Eldran, Lyra, Kael..." />
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <button type="button" id="cancel-campaign" class="btn-ghost">Annuler</button>
+          <button type="submit" class="btn-primary">Enregistrer la campagne</button>
+        </div>
+
+        <p id="campaign-message" class="create-message" aria-live="polite"></p>
+      </form>
+    </section>
+  </div>
+
+<!-- PANNEAU DE CRÉATION DE PERSONNAGE -->
+  <div id="create-panel-backdrop" class="create-backdrop hidden">
+    <section class="create-panel">
+      <header class="create-header">
+        <h2>Personnage</h2>
+        <button id="close-create-panel" class="close-btn" aria-label="Fermer">✕</button>
+      </header>
+      <p class="create-subtitle">
+        Remplis les informations ci-dessous pour créer ou modifier un personnage.
+      </p>
+
+      <form id="create-character-form" class="create-form">
+        <div class="form-row">
+          <div class="form-field">
+            <label for="char-name">Nom du personnage</label>
+            <input type="text" id="char-name" required placeholder="Ex : Eldran Vael" />
+          </div>
+          <div class="form-field">
+            <label for="char-player">Nom du joueur</label>
+            <input type="text" id="char-player" required placeholder="Ex : Alice" />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-field">
+            <label for="char-class">Classe / rôle</label>
+            <input type="text" id="char-class" required placeholder="Ex : Mage de guerre arcanique" />
+          </div>
+          <div class="form-field">
+            <label for="char-level">Niveau</label>
+            <input type="number" id="char-level" min="1" max="30" value="1" required />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-field">
+            <label for="char-status">Statut</label>
+            <select id="char-status">
+              <option value="actif">Actif</option>
+              <option value="legende">Légende</option>
+              <option value="retraite">Retraité</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label for="char-last-campaign">Dernière campagne jouée (optionnel)</label>
+            <input type="text" id="char-last-campaign" placeholder="Ex : Les Cendres de l’Empire de Verre" />
+          </div>
+        </div>
+
+                <div class="form-row">
+          <div class="form-field">
+            <label>Portrait du personnage</label>
+            <div id="portrait-dropzone" class="portrait-dropzone">
+              <div class="portrait-preview-wrapper">
+                <span id="portrait-instructions" class="dropzone-instructions">
+                  Glisse une image ici ou clique pour en choisir une.
+                </span>
+                <img id="portrait-preview-img" class="portrait-preview-img" alt="Portrait du personnage" style="display:none;" />
+              </div>
+              <input type="file" id="char-portrait-file" accept="image/*" />
+            </div>
+            <small class="dropzone-hint">
+              L'image reste uniquement sur ton ordinateur (aucun envoi en ligne).
+            </small>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-field">
+            <label for="char-lore">Histoire / lore du personnage</label>
+            <textarea id="char-lore" rows="4" placeholder="Quelques lignes sur le passé, la personnalité ou les objectifs du personnage."></textarea>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-field">
+            <label for="char-xp">Progression vers le prochain niveau (%)</label>
+            <input type="number" id="char-xp" min="0" max="100" value="0" />
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <button type="button" id="cancel-create" class="btn-ghost">Annuler</button>
+          <button type="submit" class="btn-primary">Ajouter le personnage</button>
+        </div>
+
+        <p id="create-message" class="create-message" aria-live="polite"></p>
+      </form>
+    </section>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
