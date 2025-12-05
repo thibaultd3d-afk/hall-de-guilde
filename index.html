@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Hall de guilde – Version joueurs</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="top-bar">
+    <div class="logo">
+      <div class="logo-mark">⚔️</div>
+      <div class="logo-text">
+        <div class="logo-title">Hall de guilde</div>
+        <div class="logo-subtitle">Version joueurs – lecture seule</div>
+      </div>
+    </div>
+    <nav class="main-nav">
+      <button class="nav-btn nav-btn-active" data-section="section-personnages">Personnages</button>
+      <button class="nav-btn" data-section="section-campagnes">Campagnes</button>
+      <button class="nav-btn" data-section="section-ressources">Ressources</button>
+    </nav>
+  </header>
+
+  <main class="main-layout">
+    <!-- SECTION PERSONNAGES -->
+    <section id="section-personnages" class="section section-active">
+      <header class="section-header">
+        <div>
+          <h2>Personnages de la guilde</h2>
+          <p class="section-subtitle">Galerie des aventuriers jouables dans l'univers Ceria.</p>
+        </div>
+        <div class="section-controls">
+          <div class="filter-group">
+            <button class="chip chip-active" data-filter="all">Tous</button>
+            <button class="chip" data-filter="actif">Actifs</button>
+            <button class="chip" data-filter="legende">Légendes</button>
+            <button class="chip" data-filter="retraite">Retraités</button>
+          </div>
+        </div>
+      </header>
+
+      <div id="characters-grid" class="cards-grid"></div>
+      <p id="characters-empty" class="empty-state hidden">
+        Aucun personnage à afficher. Demande au MJ d'exporter l'univers depuis la version admin.
+      </p>
+    </section>
+
+    <!-- SECTION CAMPAGNES -->
+    <section id="section-campagnes" class="section">
+      <header class="section-header">
+        <div>
+          <h2>Campagnes de la guilde</h2>
+          <p class="section-subtitle">Aventures en cours, à venir et déjà entrées dans la légende.</p>
+        </div>
+        <div class="section-controls">
+          <div class="tabs">
+            <button class="tab tab-active" data-campaign-tab="en-cours">En cours</button>
+            <button class="tab" data-campaign-tab="en-attente">En attente</button>
+            <button class="tab" data-campaign-tab="finie">Finies</button>
+          </div>
+        </div>
+      </header>
+
+      <div id="campaigns-grid" class="cards-grid"></div>
+      <p id="campaigns-empty" class="empty-state hidden">
+        Aucune campagne trouvée pour cette catégorie.
+      </p>
+    </section>
+
+    <!-- SECTION RESSOURCES -->
+    <section id="section-ressources" class="section">
+      <header class="section-header">
+        <div>
+          <h2>Ressources de l'univers</h2>
+          <p class="section-subtitle">Carte du monde et grands éléments de lore accessibles aux joueurs.</p>
+        </div>
+      </header>
+
+      <div class="section-body resources-layout">
+        <article class="resource-card map-card">
+          <h3>Carte du monde</h3>
+          <p class="resource-subtitle">
+            Cette carte est définie par le MJ dans la version admin. Ici vous la consultez uniquement.
+          </p>
+          <div class="map-wrapper">
+            <img id="world-map-image" src="world-map-placeholder.jpg" alt="Carte du monde" />
+          </div>
+        </article>
+
+        <article class="resource-card lore-card">
+          <h3>Histoire & lore</h3>
+          <div class="lore-tabs-header">
+            <div class="lore-tabs" id="lore-tabs">
+              <!-- rempli en JS -->
+            </div>
+          </div>
+          <div class="lore-panels" id="lore-panels">
+            <!-- rempli en JS -->
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>© Ceria – Univers JdR partagé – Hall de guilde (version joueurs)</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
